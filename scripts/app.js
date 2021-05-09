@@ -2,31 +2,29 @@ const cafeForm = document.getElementById("cafeForm");
 const cafeList = document.getElementById("cafeList");
 
 // event listeners
-// window.addEventListener("DOMContentLoaded", generateHTMLTemplate);
 window.addEventListener("DOMContentLoaded", getFromDatabase);
-cafeForm.addEventListener("submit", submitCafeForm);
+cafeForm.addEventListener("submit", addCafe);
 cafeList.addEventListener("click", removeCafe);
 
-//helper function to display cafes
-function displayCafes() {
-  console.log(cafes);
-}
-
 // submit form function
-function submitCafeForm(e) {
+function addCafe(e) {
   e.preventDefault();
   let newCafe = cafeForm.addCafe.value;
   let newCafeCity = cafeForm.addCity.value;
 
-  //check if value of addCafe is empty and add to array
+  //check if value of addCafe is empty and add to db
   if(newCafe && newCafeCity)
-    cafes.push({cafe: newCafe, city: newCafeCity});
+    db.collection("cafes").add({
+      cafe: newCafe,
+      city: newCafeCity
+    }).then(msg => console.log(msg))
   else if(newCafe)
-  cafes.push({cafe: newCafe});
+    db.collection("cafes").add({
+     cafe: newCafe
+    }).then(msg => console.log(msg))
 
   //clear form
   cafeForm.reset();
-  generateHTMLTemplate();
 }
 
 // function to generate HTML list template
@@ -37,7 +35,7 @@ function renderCafe(cafe) {
   const cafeSpanElement = document.createElement("span");
   const cafeSpanTextNode = document.createTextNode(cafe.data().cafe);
   const citySpanElement = document.createElement("span");
-  const citySpanTextNode = cafe.city ? document.createTextNode(cafe.data().city) : document.createTextNode("");
+  const citySpanTextNode = cafe.data().city ? document.createTextNode(cafe.data().city) : document.createTextNode("");
   const trashSpanElement = document.createElement("span");
   const trashSpanTextNode = document.createTextNode("X");
 
@@ -71,7 +69,8 @@ function removeCafe(e) {
   }
 }
 
+//get from db
 async function getFromDatabase() {
-  await db.collection("cafes").get()
+  db.collection("cafes").get()
     .then(snapshot => snapshot.docs.forEach(doc => renderCafe(doc)));
 }
