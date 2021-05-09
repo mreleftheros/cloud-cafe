@@ -1,7 +1,9 @@
 const cafeForm = document.getElementById("cafeForm");
+const cafeList = document.getElementById("cafeList");
 let cafes = [];
 
 // event listeners
+window.addEventListener("DOMContentLoaded", generateHTMLTemplate);
 cafeForm.addEventListener("submit", submitCafeForm);
 
 //helper function to display cafes
@@ -23,5 +25,41 @@ function submitCafeForm(e) {
 
   //clear form
   cafeForm.reset();
-  displayCafes();
+  generateHTMLTemplate();
+}
+
+// function to generate HTML list template
+function generateHTMLTemplate() {
+  //empty list
+  cafeList.innerHTML = "";
+
+  //iterate each cafe to generate template
+  cafes.forEach(cafe => {
+    //create elements
+    const liElement = document.createElement("li");
+    const contentDivElement = document.createElement("div");
+    const cafeSpanElement = document.createElement("span");
+    const cafeSpanTextNode = document.createTextNode(cafe.cafe);
+    const citySpanElement = document.createElement("span");
+    const citySpanTextNode = cafe.city ? document.createTextNode(cafe.city) : document.createTextNode("");
+    const trashSpanElement = document.createElement("span");
+    const trashSpanTextNode = document.createTextNode("X");
+
+    //add classes and attributes
+    liElement.classList.add("main__cafe-list-item");
+    contentDivElement.classList.add("main__cafe-list-item-content");
+    cafeSpanElement.classList.add("main__cafe-list-item-content-cafe");
+    citySpanElement.classList.add("main__cafe-list-item-content-city");
+    trashSpanElement.classList.add("main__cafe-list-item-trash");
+
+    //append elements
+    cafeSpanElement.appendChild(cafeSpanTextNode);
+    citySpanElement.appendChild(citySpanTextNode);
+    trashSpanElement.appendChild(trashSpanTextNode);
+    contentDivElement.appendChild(cafeSpanElement);
+    contentDivElement.appendChild(citySpanElement);
+    liElement.appendChild(contentDivElement);
+    liElement.appendChild(trashSpanElement);
+    cafeList.appendChild(liElement);
+  }) 
 }
