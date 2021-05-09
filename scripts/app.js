@@ -74,6 +74,10 @@ function removeCafe(e) {
   //check if target is trash
   if(e.target.classList.contains("trash")) {
     let selectedCafe = e.target.parentElement;
+    let id = selectedCafe.getAttribute("data-id");
+
+    //remove from db
+    db.collection("cafes").doc(id).delete();
     
     //remove li
     selectedCafe.remove();
