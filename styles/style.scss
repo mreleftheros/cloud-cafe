@@ -38,6 +38,19 @@
     margin-bottom: 1rem;
   }
 
+  .show {
+    opacity: 1;
+  }
+
+  &__form-message {
+    min-height: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: lime;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+
   &__cafe-list {
     list-style: none;
     padding: .5rem;

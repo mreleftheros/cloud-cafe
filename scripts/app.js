@@ -1,5 +1,6 @@
 const cafeForm = document.getElementById("cafeForm");
 const cafeList = document.getElementById("cafeList");
+const formMessage = document.getElementById("formMessage");
 
 // event listeners
 window.addEventListener("DOMContentLoaded", getFromDatabase);
@@ -13,15 +14,24 @@ function addCafe(e) {
   let newCafeCity = cafeForm.addCity.value;
 
   //check if value of addCafe is empty and add to db
-  if(newCafe && newCafeCity)
+  if(newCafe && newCafeCity) {
     db.collection("cafes").add({
       cafe: newCafe,
       city: newCafeCity
-    }).then(msg => console.log(msg))
-  else if(newCafe)
+    }).then(msg => console.log(msg));
+  }
+  else if(newCafe) {
     db.collection("cafes").add({
      cafe: newCafe
-    }).then(msg => console.log(msg))
+    }).then(msg => {
+      formMessage.classList.add("show");
+      formMessage.textContent = `${msg.id} was added successfully!`;
+      setTimeout(() => {
+        formMessage.classList.remove("show");
+        formMessage.textContent = "";
+      }, 3000)
+    });
+  }
 
   //clear form
   cafeForm.reset();

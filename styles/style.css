@@ -51,6 +51,17 @@ body {
   align-items: center;
   margin-bottom: 1rem;
 }
+.main .show {
+  opacity: 1;
+}
+.main__form-message {
+  min-height: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: lime;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 .main__cafe-list {
   list-style: none;
   padding: 0.5rem;
