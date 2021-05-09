@@ -51,6 +51,7 @@ function renderCafe(cafe) {
 
   //add classes and attributes
   liElement.classList.add("main__cafe-list-item");
+  liElement.setAttribute("data-id", cafe.id);
   contentDivElement.classList.add("main__cafe-list-item-content");
   cafeSpanElement.classList.add("main__cafe-list-item-content-cafe");
   citySpanElement.classList.add("main__cafe-list-item-content-city");
