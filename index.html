@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Cafe</title>
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  
+  <header class="header">
+    <h1 class="header__title">Cloud Cafe</h1>
+  </header>
+
+  <main class="main">
+    <div class="main__wrapper">
+      <form action="" id="cafeForm" class="main__cafe-form">
+        <label for="addCafe"></label>
+        <input type="text" id="addCafe" name="addCafe" placeholder="Enter cafe...">
+        <label for="addCity"></label>
+        <input type="text" id="addCity" name="addCity" placeholder="Enter city...">
+        <button>Add</button>
+      </form>
+  
+      <ul id="cafeList" class="main__cafe-list">
+        <li class="main__cafe-list-item">
+          <div class="main__cafe-list-item-content">
+            <span class="main__cafe-list-item-content-cafe">Monopoly</span>
+            <span class="main__cafe-list-item-content-city">Kalamaria</span>
+          </div>
+          <span class="main__cafe-list-item-trash">X</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>

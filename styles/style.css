@@ -1,0 +1,89 @@
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: "Lato", sans-serif;
+  min-height: 100vh;
+  box-sizing: inherit;
+  background: linear-gradient(45deg, #fd0000 40%, #0000ff 60%);
+}
+
+.header {
+  min-height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__title {
+  font-size: 4rem;
+  text-shadow: 1px 1px 3px #111;
+  color: #fff;
+  width: 50rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.main {
+  display: flex;
+  min-height: 75vh;
+  justify-content: center;
+}
+.main__wrapper {
+  width: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+.main__cafe-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.main__cafe-list {
+  list-style: none;
+  padding: 0.5rem;
+}
+.main__cafe-list-item {
+  width: 100%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.main__cafe-list-item span {
+  display: block;
+}
+.main__cafe-list-item-content-cafe {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.main__cafe-list-item-content-city {
+  font-size: 1.5rem;
+  color: #808992;
+}
+.main__cafe-list-item-trash {
+  font-size: 2rem;
+  position: absolute;
+  top: 1rem;
+  left: 95%;
+  color: #fff;
+  cursor: pointer;
+  background: crimson;
+  padding: 0.5rem;
+}
+.main__cafe-list-item-trash:hover {
+  background: transparent;
+  color: crimson;
+}/*# sourceMappingURL=style.css.map */

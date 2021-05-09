@@ -1,0 +1,86 @@
+@import "defaults";
+
+.header {
+  min-height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+  &__title {
+    font-size: 4rem;
+    text-shadow: 1px 1px 3px #111;
+    color: #fff;
+    width: 50rem;
+    text-align: center;
+    background: rgba(0, 0, 0, .1);
+    border-radius: 1rem;
+  }
+}
+
+.main {
+  display: flex;
+  min-height: 75vh;
+  justify-content: center;
+  
+  &__wrapper {
+    width: 50%;
+    background: rgba(255, 255, 255, .3);
+    padding: 1.5rem;
+    border-radius: .5rem;
+  }
+
+  &__cafe-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__cafe-list {
+    list-style: none;
+    padding: .5rem;
+
+    &-item {
+      width: 100%;
+      position: relative;
+      background: rgba(255, 255, 255, .8);
+      padding: .5rem;
+      border-radius: .5rem;
+
+      span {
+        display: block;
+      }
+
+      &-content {
+
+        &-cafe {
+          font-size: 2rem;
+          margin-bottom: .5rem;
+        }
+
+        &-city {
+          font-size: 1.5rem;
+          color: #808992;
+        }
+      }
+
+      &-trash {
+        font-size: 2rem;
+        position: absolute;
+        top: 1rem;
+        left: 95%;
+        color: #fff;
+        cursor: pointer;
+        background: crimson;
+        padding: .5rem;
+
+        &:hover {
+          background: transparent;
+          color: crimson;
+        }
+      }
+    }
+  }
+}

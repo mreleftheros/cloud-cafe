@@ -1,0 +1,21 @@
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: "Lato", sans-serif;
+  min-height: 100vh;
+  box-sizing: inherit;
+  background: linear-gradient(
+    45deg,
+     #fd0000 40%,
+     #0000ff 60%);
+}
