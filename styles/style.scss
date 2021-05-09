@@ -40,13 +40,18 @@
 
   .show {
     opacity: 1;
+    color: lime;
+  }
+
+  .remove {
+    opacity: 1;
+    color: crimson;
   }
 
   &__form-message {
     min-height: 2rem;
     font-size: 1.5rem;
     text-align: center;
-    color: lime;
     opacity: 0;
     transition: opacity .3s ease;
   }

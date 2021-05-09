@@ -3,7 +3,18 @@ const cafeList = document.getElementById("cafeList");
 const formMessage = document.getElementById("formMessage");
 
 // event listeners
-window.addEventListener("DOMContentLoaded", getFromDatabase);
+window.addEventListener("DOMContentLoaded", () => {
+  db.collection("cafes").onSnapshot(snapshot => {
+    snapshot.docChanges().forEach(change => {
+      if(change.type === "added")
+        renderCafe(change.doc);
+      else if(change.type === "removed") {
+        let li = cafeList.querySelector("[data-id=" + change.doc.id + "]");
+        li.remove();
+      }
+    })
+  })
+});
 cafeForm.addEventListener("submit", addCafe);
 cafeList.addEventListener("click", removeCafe);
 
@@ -18,14 +29,21 @@ function addCafe(e) {
     db.collection("cafes").add({
       cafe: newCafe,
       city: newCafeCity
-    }).then(msg => console.log(msg));
+    }).then(msg => {
+      formMessage.classList.add("show");
+      formMessage.textContent = `ID ${msg.id} was added!`;
+      setTimeout(() => {
+        formMessage.classList.remove("show");
+        formMessage.textContent = "";
+      }, 3000)
+    });
   }
   else if(newCafe) {
     db.collection("cafes").add({
      cafe: newCafe
     }).then(msg => {
       formMessage.classList.add("show");
-      formMessage.textContent = `${msg.id} was added successfully!`;
+      formMessage.textContent = `ID ${msg.id} was added!`;
       setTimeout(() => {
         formMessage.classList.remove("show");
         formMessage.textContent = "";
@@ -76,16 +94,14 @@ function removeCafe(e) {
     let selectedCafe = e.target.parentElement;
     let id = selectedCafe.getAttribute("data-id");
 
-    //remove from db
+    //remove from db and remove li
     db.collection("cafes").doc(id).delete();
-    
-    //remove li
-    selectedCafe.remove();
-  }
-}
 
-//get from db
-async function getFromDatabase() {
-  db.collection("cafes").get()
-    .then(snapshot => snapshot.docs.forEach(doc => renderCafe(doc)));
+    formMessage.textContent = `ID ${id} was removed!`;
+    formMessage.classList.add("remove");
+    setTimeout(() => {
+      formMessage.classList.remove("remove");
+      formMessage.textContent = "";
+    }, 3000)
+  }
 }

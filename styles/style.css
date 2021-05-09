@@ -53,12 +53,16 @@ body {
 }
 .main .show {
   opacity: 1;
+  color: lime;
+}
+.main .remove {
+  opacity: 1;
+  color: crimson;
 }
 .main__form-message {
   min-height: 2rem;
   font-size: 1.5rem;
   text-align: center;
-  color: lime;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
