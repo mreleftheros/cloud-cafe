@@ -5,6 +5,7 @@ let cafes = [];
 // event listeners
 window.addEventListener("DOMContentLoaded", generateHTMLTemplate);
 cafeForm.addEventListener("submit", submitCafeForm);
+cafeList.addEventListener("click", removeCafe);
 
 //helper function to display cafes
 function displayCafes() {
@@ -51,6 +52,7 @@ function generateHTMLTemplate() {
     cafeSpanElement.classList.add("main__cafe-list-item-content-cafe");
     citySpanElement.classList.add("main__cafe-list-item-content-city");
     trashSpanElement.classList.add("main__cafe-list-item-trash");
+    trashSpanElement.classList.add("trash");
 
     //append elements
     cafeSpanElement.appendChild(cafeSpanTextNode);
@@ -62,4 +64,20 @@ function generateHTMLTemplate() {
     liElement.appendChild(trashSpanElement);
     cafeList.appendChild(liElement);
   }) 
+}
+
+//function to remove cafe from array
+function removeCafe(e) {
+  //check if target is trash
+  if(e.target.classList.contains("trash")) {
+    let selectedCafe = e.target.parentElement.firstChild.firstChild.textContent;
+    let index = cafes.findIndex(cafe => cafe.cafe === selectedCafe);
+    
+    //remove index from array and li
+    cafes.splice(index, 1);
+    e.target.parentElement.remove();
+
+    //generate template
+    generateHTMLTemplate();
+  }
 }
