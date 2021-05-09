@@ -1,9 +1,9 @@
 const cafeForm = document.getElementById("cafeForm");
 const cafeList = document.getElementById("cafeList");
-let cafes = [];
 
 // event listeners
-window.addEventListener("DOMContentLoaded", generateHTMLTemplate);
+// window.addEventListener("DOMContentLoaded", generateHTMLTemplate);
+window.addEventListener("DOMContentLoaded", getFromDatabase);
 cafeForm.addEventListener("submit", submitCafeForm);
 cafeList.addEventListener("click", removeCafe);
 
@@ -30,54 +30,48 @@ function submitCafeForm(e) {
 }
 
 // function to generate HTML list template
-function generateHTMLTemplate() {
-  //empty list
-  cafeList.innerHTML = "";
+function renderCafe(cafe) {
+  //create elements
+  const liElement = document.createElement("li");
+  const contentDivElement = document.createElement("div");
+  const cafeSpanElement = document.createElement("span");
+  const cafeSpanTextNode = document.createTextNode(cafe.data().cafe);
+  const citySpanElement = document.createElement("span");
+  const citySpanTextNode = cafe.city ? document.createTextNode(cafe.data().city) : document.createTextNode("");
+  const trashSpanElement = document.createElement("span");
+  const trashSpanTextNode = document.createTextNode("X");
 
-  //iterate each cafe to generate template
-  cafes.forEach(cafe => {
-    //create elements
-    const liElement = document.createElement("li");
-    const contentDivElement = document.createElement("div");
-    const cafeSpanElement = document.createElement("span");
-    const cafeSpanTextNode = document.createTextNode(cafe.cafe);
-    const citySpanElement = document.createElement("span");
-    const citySpanTextNode = cafe.city ? document.createTextNode(cafe.city) : document.createTextNode("");
-    const trashSpanElement = document.createElement("span");
-    const trashSpanTextNode = document.createTextNode("X");
+  //add classes and attributes
+  liElement.classList.add("main__cafe-list-item");
+  contentDivElement.classList.add("main__cafe-list-item-content");
+  cafeSpanElement.classList.add("main__cafe-list-item-content-cafe");
+  citySpanElement.classList.add("main__cafe-list-item-content-city");
+  trashSpanElement.classList.add("main__cafe-list-item-trash");
+  trashSpanElement.classList.add("trash");
 
-    //add classes and attributes
-    liElement.classList.add("main__cafe-list-item");
-    contentDivElement.classList.add("main__cafe-list-item-content");
-    cafeSpanElement.classList.add("main__cafe-list-item-content-cafe");
-    citySpanElement.classList.add("main__cafe-list-item-content-city");
-    trashSpanElement.classList.add("main__cafe-list-item-trash");
-    trashSpanElement.classList.add("trash");
-
-    //append elements
-    cafeSpanElement.appendChild(cafeSpanTextNode);
-    citySpanElement.appendChild(citySpanTextNode);
-    trashSpanElement.appendChild(trashSpanTextNode);
-    contentDivElement.appendChild(cafeSpanElement);
-    contentDivElement.appendChild(citySpanElement);
-    liElement.appendChild(contentDivElement);
-    liElement.appendChild(trashSpanElement);
-    cafeList.appendChild(liElement);
-  }) 
+  //append elements
+  cafeSpanElement.appendChild(cafeSpanTextNode);
+  citySpanElement.appendChild(citySpanTextNode);
+  trashSpanElement.appendChild(trashSpanTextNode);
+  contentDivElement.appendChild(cafeSpanElement);
+  contentDivElement.appendChild(citySpanElement);
+  liElement.appendChild(contentDivElement);
+  liElement.appendChild(trashSpanElement);
+  cafeList.appendChild(liElement);
 }
 
-//function to remove cafe from array
+//function to remove cafe
 function removeCafe(e) {
   //check if target is trash
   if(e.target.classList.contains("trash")) {
-    let selectedCafe = e.target.parentElement.firstChild.firstChild.textContent;
-    let index = cafes.findIndex(cafe => cafe.cafe === selectedCafe);
+    let selectedCafe = e.target.parentElement;
     
-    //remove index from array and li
-    cafes.splice(index, 1);
-    e.target.parentElement.remove();
-
-    //generate template
-    generateHTMLTemplate();
+    //remove li
+    selectedCafe.remove();
   }
+}
+
+async function getFromDatabase() {
+  await db.collection("cafes").get()
+    .then(snapshot => snapshot.docs.forEach(doc => renderCafe(doc)));
 }
